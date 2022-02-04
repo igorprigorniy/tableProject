@@ -1,3 +1,4 @@
+import copy
 import random
 
 cities = [
@@ -6,6 +7,16 @@ cities = [
     'Екатиринбург',
     'Новосибирск',
     'Сочи'
+]
+
+lessons = [
+    'Матан',
+    'Общая физика. Механика',
+    'Электродинамика',
+    'Дифуры',
+    'Интуры',
+    'Молекулярная физика',
+    'Оптика'
 ]
 
 names_male = [
@@ -78,18 +89,26 @@ def create_test_data_frame(count=1):
         name = random.choice(names_male) if gender == 'male' else random.choice(names_female)
         surname = random.choice(surnames)[0] if gender == 'male' else random.choice(surnames)[1]
 
-        rows.append((
-            name[0],
-            surname[0],
-            ' '.join([name[0], surname[0]]),
-            name[1],
-            surname[1],
-            ' '.join([name[1], surname[1]]),
-            gender,
-            random.choice(cities),
-            random.choice([2, 3, 4, 5]),
-            random.choice([2, 3, 4, 5])
-        ))
+        city = random.choice(cities)
+
+        my_lessons = copy.deepcopy(lessons)
+
+        for sem in range(4):
+            lesson_id = random.choice([i for i in range(len(my_lessons))])
+            rows.append((
+                name[0],
+                surname[0],
+                ' '.join([name[0], surname[0]]),
+                name[1],
+                surname[1],
+                ' '.join([name[1], surname[1]]),
+                gender,
+                city,
+                my_lessons[lesson_id],
+                random.choice([2, 3, 4, 5]),
+                sem + 1
+            ))
+            my_lessons.pop(lesson_id)
 
     return rows
 
