@@ -1,5 +1,12 @@
 import random
 
+cities = [
+    'Москва',
+    'Санкт-Петербург',
+    'Екатиринбург',
+    'Новосибирск',
+    'Сочи'
+]
 
 names_male = [
     ('Василий', 'Vasiliy'),
@@ -70,6 +77,7 @@ def create_test_data_frame(count=1):
         gender = random.choice(['male', 'female'])
         name = random.choice(names_male) if gender == 'male' else random.choice(names_female)
         surname = random.choice(surnames)[0] if gender == 'male' else random.choice(surnames)[1]
+
         rows.append((
             name[0],
             surname[0],
@@ -77,7 +85,10 @@ def create_test_data_frame(count=1):
             name[1],
             surname[1],
             ' '.join([name[1], surname[1]]),
-            gender
+            gender,
+            random.choice(cities),
+            random.choice([2, 3, 4, 5]),
+            random.choice([2, 3, 4, 5])
         ))
 
     return rows
